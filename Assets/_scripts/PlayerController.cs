@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         // When Space is pressed, invoke the OnJump 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
             OnJump();
         }
@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
     
     private void AnimateSprite()
     {
-        if(GameManager.IsGameRunning == false) return;
+        if(!GameManager.IsGameRunning) return;
         if(!m_AudioSource.isPlaying) m_AudioSource.PlayOneShot(heliSound);
         spriteIndex++;
         if(spriteIndex >= sprites.Length)
@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour
     
     private void AdjustPlayerPosition()
     {
-        if(GameManager.IsGameRunning == false) return;
+        if(!GameManager.IsGameRunning) return;
         direction.y += gravity * Time.deltaTime;
         transform.position += direction * Time.deltaTime;
     }
